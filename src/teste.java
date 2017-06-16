@@ -15,6 +15,7 @@ public class teste {
         System.out.println(x.contarRiscos());
         x.imprimeMatrizH();
         x.imprimeMatrizV();
+        in.close();
 	}
 
 }
