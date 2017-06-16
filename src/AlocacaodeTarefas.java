@@ -61,19 +61,17 @@ public class AlocacaodeTarefas {
 						}
 					}
 					if(parametro==1){
+						n++;
 						if(nlinha>=ncoluna){
-							n++;
 							riscarLinha(i);
 						}else{
-							n++;
 							riscarColuna(j);
 						}
 					}else{
+						n++;
 						if(nlinha>ncoluna){
-							n++;
 							riscarLinha(i);
 						}else{
-							n++;
 							riscarColuna(j);
 						}
 					}
