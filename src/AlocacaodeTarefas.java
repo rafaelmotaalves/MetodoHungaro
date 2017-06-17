@@ -11,7 +11,7 @@ public class AlocacaodeTarefas {
 		this.matrizOriginal=matriz;
 		this.tamanho=tamanho;
 	}
-    public void subtraiLinha( int tamanho) {
+    public void subtraiLinha() {
         int menor;
     	for (int i = 0; i < tamanho; i++) {
             menor = matriz[i][0];
@@ -28,7 +28,7 @@ public class AlocacaodeTarefas {
             }
         }
     }
-    public void subtraiColuna( int tamanho) {
+    public void subtraiColuna() {
     	int menor;
         for (int j = 0; j < tamanho; j++) {
             menor = matriz[0][j];
@@ -99,7 +99,21 @@ public class AlocacaodeTarefas {
 			return riscarLinhas(2);
 		}
 	}
-    public void imprimeMatrizH() {
+	public void metodoHungaro(){
+		subtraiLinha();
+		subtraiColuna();
+		metodoHungaroP2();
+		
+	}
+	public void metodoHungaroP2(){
+		int n=contarRiscos();
+		if(n==tamanho){
+			
+		}else{
+			metodoHungaroP2();
+		}
+	}
+    public void imprimeMatrizRiscosLinha() {
         for (int i = 0; i < tamanho; i++) {
             for (int j = 0; j < tamanho; j++) {
                 System.out.print(riscoslinha[i][j] + " ");
@@ -108,7 +122,7 @@ public class AlocacaodeTarefas {
         }
         System.out.println("");
     }
-    public void imprimeMatrizV () {
+    public void imprimeMatrizRiscosColuna () {
         for (int i = 0; i < tamanho; i++) {
             for (int j = 0; j <tamanho ; j++) {
                 System.out.print(riscoscoluna[i][j] + " ");

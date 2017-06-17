@@ -13,8 +13,8 @@ public class teste {
         }
         AlocacaodeTarefas x = new AlocacaodeTarefas(matriz,n);
         System.out.println(x.contarRiscos());
-        x.imprimeMatrizH();
-        x.imprimeMatrizV();
+        x.imprimeMatrizRiscosLinha();
+        x.imprimeMatrizRiscosColuna();
         in.close();
 	}
 
