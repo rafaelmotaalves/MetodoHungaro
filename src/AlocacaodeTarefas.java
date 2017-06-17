@@ -1,44 +1,46 @@
 
 public class AlocacaodeTarefas {
-	private int[][] matrizOriginal;
 	private int[][] matriz;
+	private int[][] matrizOriginal;
 	private int tamanho;
 	private boolean[][] riscoslinha;
 	private boolean[][] riscoscoluna;
+	private int[] resultado;
 	
-	public AlocacaodeTarefas(int[][] matriz,int tamanho){
+	public AlocacaodeTarefas(int tamanho,int[][] matriz){
+		this.tamanho=tamanho;
+		this.resultado=new int[tamanho];
 		this.matriz=matriz;
 		this.matrizOriginal=matriz;
-		this.tamanho=tamanho;
 	}
     public void subtraiLinha() {
         int menor;
     	for (int i = 0; i < tamanho; i++) {
-            menor = matriz[i][0];
+            menor = this.matriz[i][0];
             // procura o menor elemento da linha
             for (int j = 0; j < tamanho; j++) {
-                if (matriz[i][j] < menor) {
-                    menor = matriz[i][j];
+                if (this.matriz[i][j] < menor) {
+                    menor = this.matriz[i][j];
  
                 }
             }
             // diminui todos os elementos da linha do menor
             for (int j = 0; j < tamanho; j++) {
-                matriz[i][j] -= menor;
+                this.matriz[i][j] -= menor;
             }
         }
     }
     public void subtraiColuna() {
     	int menor;
         for (int j = 0; j < tamanho; j++) {
-            menor = matriz[0][j];
+            menor = this.matriz[0][j];
             for (int i = 0; i < tamanho; i++) {
-                if (matriz[i][j] < menor) {
-                    menor = matriz[i][j];
+                if (this.matriz[i][j] < menor) {
+                    menor = this.matriz[i][j];
                 }
             }
             for (int i = 0; i < tamanho; i++) {
-                matriz[i][j] -= menor;
+                this.matriz[i][j] -= menor;
             }
             menor = 0;
         }
@@ -50,13 +52,13 @@ public class AlocacaodeTarefas {
 		this.riscoscoluna=new boolean[tamanho][tamanho];
 		for(int i=0;i<tamanho;i++ ){
 			for(int j=0;j<tamanho;j++){
-				if(matriz[i][j]==0 && !(riscoslinha[i][j] || riscoscoluna[i][j]) ){
+				if(this.matriz[i][j]==0 && !(riscoslinha[i][j] || riscoscoluna[i][j]) ){
 					int nlinha=0 ,ncoluna=0;
 					for(int x=0; x<tamanho;x++){
-						if(matriz[i][x]==0 && !(riscoslinha[i][x] || riscoscoluna[i][x])){
+						if(this.matriz[i][x]==0 && !(riscoslinha[i][x] || riscoscoluna[i][x])){
 							nlinha++;
 						}
-						if(matriz[x][j]==0 && !(riscoslinha[x][j] || riscoscoluna[x][j])){
+						if(this.matriz[x][j]==0 && !(riscoslinha[x][j] || riscoscoluna[x][j])){
 							ncoluna++;
 						}
 					}
@@ -102,16 +104,48 @@ public class AlocacaodeTarefas {
 	public void metodoHungaro(){
 		subtraiLinha();
 		subtraiColuna();
-		metodoHungaroP2();
+		metodoHungaro2();
 		
 	}
-	public void metodoHungaroP2(){
+	public void metodoHungaro2(){
 		int n=contarRiscos();
-		if(n==tamanho){
-			
+		if(n>=tamanho){
 		}else{
-			metodoHungaroP2();
+			passo5();
+			metodoHungaro2();
 		}
+	}
+	
+
+	public void passo5(){
+		int menor=1;
+		for(int i=0;i<tamanho;i++){
+			for(int j=0;j<tamanho;j++){
+				if(this.matriz[i][j]<menor && !(riscoslinha[i][j] || riscoscoluna[i][j]) ){
+					menor=this.matriz[i][j];
+				}
+			}
+		}
+		for(int i=0;i<tamanho;i++){
+			for(int j=0;j<tamanho;j++){
+				if(!(riscoslinha[i][j] || riscoscoluna[i][j]) ){
+					this.matriz[i][j]=this.matriz[i][j]- menor;
+				}else if(riscoslinha[i][j] && riscoscoluna[i][j]){
+					this.matriz[i][j]=this.matriz[i][j]+menor;
+				}
+			}
+		}
+		
+	}
+	public int[] getResultado(int[][] x){
+		for(int i=0;i<this.tamanho;i++){
+			for(int j=0;j<this.tamanho;j++){
+				if(this.matriz[i][j]==0){
+					 resultado[i]=x[i][j];
+				}
+			}
+		}
+		return resultado;
 	}
     public void imprimeMatrizRiscosLinha() {
         for (int i = 0; i < tamanho; i++) {
@@ -131,4 +165,10 @@ public class AlocacaodeTarefas {
         }
         System.out.println("");
     }
+	public int[][] getMatrizOriginal() {
+		return matrizOriginal;
+	}
+	public void setMatrizOriginal(int[][] matrizOriginal) {
+		this.matrizOriginal = matrizOriginal;
+	}
 }
