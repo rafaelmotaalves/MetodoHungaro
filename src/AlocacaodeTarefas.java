@@ -10,9 +10,13 @@ public class AlocacaodeTarefas {
 	public AlocacaodeTarefas(int tamanho,int[][] matriz){
 		this.tamanho=tamanho;
 		this.matriz=matriz;
+<<<<<<< HEAD
 		this.matrizx=matriz;
 		this.resultado=new int[tamanho];
 		}
+=======
+	}
+>>>>>>> 242f0db29f519052eef8f312b38b44b8ed92cf19
     public void subtraiLinha() {
         int menor;
     	for (int i = 0; i < tamanho; i++) {
@@ -156,4 +160,12 @@ public class AlocacaodeTarefas {
         }
         System.out.println("");
     }
+<<<<<<< HEAD
+=======
+    public int[] getResultado(){
+    	return this.resultado;
+    }
+
+    
+>>>>>>> 242f0db29f519052eef8f312b38b44b8ed92cf19
 }
