@@ -1,7 +1,6 @@
 
 public class AlocacaodeTarefas {
 	private int[][] matriz;
-	private int[][] matrizOriginal;
 	private int tamanho;
 	private boolean[][] riscoslinha;
 	private boolean[][] riscoscoluna;
@@ -11,7 +10,6 @@ public class AlocacaodeTarefas {
 		this.tamanho=tamanho;
 		this.resultado=new int[tamanho];
 		this.matriz=matriz;
-		this.matrizOriginal=matriz;
 	}
     public void subtraiLinha() {
         int menor;
@@ -165,10 +163,9 @@ public class AlocacaodeTarefas {
         }
         System.out.println("");
     }
-	public int[][] getMatrizOriginal() {
-		return matrizOriginal;
-	}
-	public void setMatrizOriginal(int[][] matrizOriginal) {
-		this.matrizOriginal = matrizOriginal;
-	}
+    public int[] getResultado(){
+    	return this.resultado;
+    }
+
+    
 }
