@@ -1,18 +1,18 @@
 
 public class AlocacaodeTarefas {
 	private int[][] matriz;
-	private int[][] matrizOriginal;
 	private int tamanho;
+	private int[][] matrizx;
+	private int[] resultado;
 	private boolean[][] riscoslinha;
 	private boolean[][] riscoscoluna;
-	private int[] resultado;
 	
 	public AlocacaodeTarefas(int tamanho,int[][] matriz){
 		this.tamanho=tamanho;
-		this.resultado=new int[tamanho];
 		this.matriz=matriz;
-		this.matrizOriginal=matriz;
-	}
+		this.matrizx=matriz;
+		this.resultado=new int[tamanho];
+		}
     public void subtraiLinha() {
         int menor;
     	for (int i = 0; i < tamanho; i++) {
@@ -110,6 +110,7 @@ public class AlocacaodeTarefas {
 	public void metodoHungaro2(){
 		int n=contarRiscos();
 		if(n>=tamanho){
+			
 		}else{
 			passo5();
 			metodoHungaro2();
@@ -137,16 +138,6 @@ public class AlocacaodeTarefas {
 		}
 		
 	}
-	public int[] getResultado(int[][] x){
-		for(int i=0;i<this.tamanho;i++){
-			for(int j=0;j<this.tamanho;j++){
-				if(this.matriz[i][j]==0){
-					 resultado[i]=x[i][j];
-				}
-			}
-		}
-		return resultado;
-	}
     public void imprimeMatrizRiscosLinha() {
         for (int i = 0; i < tamanho; i++) {
             for (int j = 0; j < tamanho; j++) {
@@ -165,10 +156,4 @@ public class AlocacaodeTarefas {
         }
         System.out.println("");
     }
-	public int[][] getMatrizOriginal() {
-		return matrizOriginal;
-	}
-	public void setMatrizOriginal(int[][] matrizOriginal) {
-		this.matrizOriginal = matrizOriginal;
-	}
 }

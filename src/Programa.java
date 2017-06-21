@@ -18,17 +18,7 @@ public class Programa {
 		
 		AlocacaodeTarefas teste= new AlocacaodeTarefas(tamanho,matrix);
 		teste.metodoHungaro();
-		int[] resposta=teste.getResultado(a);
-		for(int i=0;i<tamanho;i++){
-			System.out.println(resposta[i]);
-		}
-		for(int i=0;i<tamanho;i++){
-			for(int j=0;j<tamanho;j++){
-				System.out.print(a[i][j]+" ");
-			}
-			System.out.println();
 		}
 		
 	}
 
-}
