@@ -18,19 +18,16 @@ public class Programa {
 		
 		AlocacaodeTarefas teste= new AlocacaodeTarefas(tamanho,matrix);
 		teste.metodoHungaro();
-<<<<<<< HEAD
-=======
 		for(int i=0;i<tamanho;i++){
 			for(int j=0;j<tamanho;j++){
 				System.out.print(matrizOriginal[i][j]+" ");
 			}
 			System.out.println();
->>>>>>> 242f0db29f519052eef8f312b38b44b8ed92cf19
 		}
-		teste.alocacaoDeZeros(matrizOriginal);
 		int[] x = teste.getResultado();
 		for(int i=0;i<tamanho;i++){
 			System.out.println(x[i]);
 		}
 	}
+}
 
