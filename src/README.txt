@@ -33,7 +33,7 @@ menor custo.
 92
 32
 
------------  Exemplo de saida -----------
+-----------  Saida esperada -----------
 
 -MATRIZ COM ALOCACAO OTIMA DE ZEROS-
 0 3 0 
