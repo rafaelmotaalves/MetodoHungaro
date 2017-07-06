@@ -18,3 +18,25 @@ Os valores devem ser inseridos na seguinte ordem: A, B, C, D.
 
 O resultado sera a matriz otimizada para escolha das tarefas de modo que tragam 
 menor custo.
+
+
+-----------  Exemplo de entrada -----------
+
+3
+53
+96
+37
+47
+87
+41
+60
+92
+32
+
+-----------  Exemplo de saida -----------
+
+-MATRIZ COM ALOCACAO OTIMA DE ZEROS-
+0 3 0 
+0 0 10 
+12 4 0 
+
