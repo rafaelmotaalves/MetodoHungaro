@@ -6,7 +6,7 @@ Lucas Cardoso (lccao)
 Rafael Mota (rma7)
 
 Inicialmente deve-se indicar a ordem da matriz, uma vez que para a aplicacao do 
-metodo ela deve quadrada. 
+metodo ela deve ser quadrada. 
 
 Em seguida, os valores inteiros que compoem a matriz, linha a linha.  
 Exemplo: Seja M a matriz:
