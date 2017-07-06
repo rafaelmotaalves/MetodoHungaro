@@ -2,34 +2,43 @@
 public class AlocacaodeTarefas {
 	private int[][] matriz;
 	private int tamanho;
-	private int[][] matrizx;
-	private int[] resultado;
 	private boolean[][] riscoslinha;
 	private boolean[][] riscoscoluna;
-	
+	/**
+	 * 	Executa a Alocação de tarefas Otima.
+	 * @param tamanho
+	 * 		Quantidade de Colunas/Linhas da matriz quadrada
+	 * @param matriz
+	 * 		Matriz-custo quadrada com entradas inteiras representando o problema de alocação de tarefas
+	 * 		onde a coluna representa o a tarefa a ser realizada e a linha o custo de cada opção.
+	 */
 	public AlocacaodeTarefas(int tamanho,int[][] matriz){
 		this.tamanho=tamanho;
 		this.matriz=matriz;
-		this.matrizx=matriz;
-		this.resultado=new int[tamanho];
+		metodoHungaro();
 		}
+    /**
+     * 		Subtrai a menor entrada de cada linha de todas as entradas da mesma linha
+     *
+     */
     public void subtraiLinha() {
         int menor;
     	for (int i = 0; i < tamanho; i++) {
             menor = this.matriz[i][0];
-            // procura o menor elemento da linha
             for (int j = 0; j < tamanho; j++) {
                 if (this.matriz[i][j] < menor) {
                     menor = this.matriz[i][j];
- 
                 }
             }
-            // diminui todos os elementos da linha do menor
             for (int j = 0; j < tamanho; j++) {
                 this.matriz[i][j] -= menor;
             }
         }
     }
+    /**
+     * 	Subtrai a menor entrada de cada coluna de todas as entradas da mesma coluna.
+     *
+     */
     public void subtraiColuna() {
     	int menor;
         for (int j = 0; j < tamanho; j++) {
@@ -45,8 +54,42 @@ public class AlocacaodeTarefas {
             menor = 0;
         }
     }
-    
-	public int riscarLinhas(int parametro){
+	/**
+	 * 	Atribui a todos os valores de determinada linha o valor true (equivalente a
+	 * riscar um traço na horizontal).
+	 * @param i
+	 * 		Linha em que o metodo vai ser realizado.
+	 */
+	public void riscarLinha(int i){
+		for(int x=0;x<tamanho;x++){
+			riscoslinha[i][x]=true;
+		}
+	}
+	/**
+	 * 	Atribui a todos os valores de determinada coluna o valor false (equivalente a riscar
+	 * um traço na vertical)
+	 * @param j
+	 * 		Coluna em que o metodo vai ser realizado.
+	 */
+	public void riscarColuna(int j){
+		for(int x=0;x<tamanho;x++){
+			riscoscoluna[x][j]=true;
+		}
+	}
+    /**
+     * 	Risca traços através de Linhas e Colunas de forma que todas entradas contendo zeros são riscadas
+     * (os traços são representados por matrizes booleanas de tamanho igual a matriz-custo uma representando os traços
+     * horizontais e a outra representando os traços verticais) testando toda vez que acha uma entrada zero se ela ja foi riscada
+     * e se existem mais outras entradas zero não riscadas na sua horizontal ou na sua vertical e riscando a linha e somando 1 um contador 
+     * toda vez que uma linha for riscada;  
+     * @param parametro
+     * 	 	Quando for efetuado o teste da quantidade de zeros na horizontal ou vertical o parametro vai determinar que direção
+     * 		vai ser favorecida caso a quantidade de entradas zero seja a mesma nas duas direções. 
+     * @return
+     * 		Retorna a quantidade linhas riscadas neste caso.
+     */
+
+	public int riscarTracos(int parametro){
 		int n=0;
 		this.riscoslinha=new boolean[tamanho][tamanho];
 		this.riscoscoluna=new boolean[tamanho][tamanho];
@@ -82,43 +125,48 @@ public class AlocacaodeTarefas {
 		}
 		return n;
 	}
-	public void riscarLinha(int i){
-		for(int x=0;x<tamanho;x++){
-			riscoslinha[i][x]=true;
-		}
-	}
-	public void riscarColuna(int j){
-		for(int x=0;x<tamanho;x++){
-			riscoscoluna[x][j]=true;
-		}
-	}
+	/** 
+	 * 	Testa os dois casos do metodo riscarLinhas favorecendo as duas direções e verificando 
+	 *em qual das duas formas são riscados menos traços
+	 * @return
+	 * 		Retorna de que forma os traços são riscados de forma otima.
+	 */
 	public int contarRiscos(){
-		int a =riscarLinhas(1);
-		int b= riscarLinhas(2);
+		int a =riscarTracos(1);
+		int b= riscarTracos(2);
 		if(a<b){
-			return riscarLinhas(1);
+			return riscarTracos(1);
 		}else{
-			return riscarLinhas(2);
+			return riscarTracos(2);
 		}
 	}
-	public void metodoHungaro(){
-		subtraiLinha();
-		subtraiColuna();
-		metodoHungaro2();
-		
-	}
-	public void metodoHungaro2(){
+/**
+ * 	Testa se o o numero minimo de linhas riscadas é igual à ordem da matriz, Caso isso aconteça
+ * há uma alocação perfeita de zeros e o programa é encerrado, Caso isso não ocorra ele chama o 
+ * método naoEstaOtimizado e depois chama a si mesmo recursivamente para que o teste seja executado
+ * novamente.
+ */
+public void testeDeOtimalidade(){
 		int n=contarRiscos();
-		if(n>=tamanho){
-			
-		}else{
-			passo5();
-			metodoHungaro2();
+		if(n!=this.tamanho) {
+			naoEstaOtimizado();
+			testeDeOtimalidade();
 		}
 	}
-	
-
-	public void passo5(){
+/**
+ * 	Executa o método hungaro na matriz-custo.
+ */
+public void metodoHungaro(){
+	subtraiLinha();
+	subtraiColuna();
+	testeDeOtimalidade();
+}
+/**
+ *	Determina a menor entrada não riscada por nenhum traço. Subtrai esta entrada de todas
+ *as entradas não riscadas e depois a soma a todas as entradas riscadas tanto horizontais
+ *quanto verticalmente.
+ */
+	public void naoEstaOtimizado(){
 		int menor=1;
 		for(int i=0;i<tamanho;i++){
 			for(int j=0;j<tamanho;j++){
@@ -136,30 +184,10 @@ public class AlocacaodeTarefas {
 				}
 			}
 		}
-		
 	}
-    public void imprimeMatrizRiscosLinha() {
-        for (int i = 0; i < tamanho; i++) {
-            for (int j = 0; j < tamanho; j++) {
-                System.out.print(riscoslinha[i][j] + " ");
-            }
-            System.out.println("");
-        }
-        System.out.println("");
-    }
-    public void imprimeMatrizRiscosColuna () {
-        for (int i = 0; i < tamanho; i++) {
-            for (int j = 0; j <tamanho ; j++) {
-                System.out.print(riscoscoluna[i][j] + " ");
-            }
-            System.out.println("");
-        }
-        System.out.println("");
-    }
-
-    public int[] getResultado(){
-    	return this.resultado;
-    }
+	public int[][] getMatriz() {
+		return this.matriz;
+	}
 
     
 }
