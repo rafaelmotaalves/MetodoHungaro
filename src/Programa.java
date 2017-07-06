@@ -15,7 +15,7 @@ public class Programa {
 		in.close();
 		AlocacaodeTarefas teste= new AlocacaodeTarefas(tamanho,matriz);
 		matriz = teste.getMatriz();
-		System.out.println("-MATRIZ COM ALOCAÇÃO OTIMA DE ZEROS-");
+		System.out.println("-MATRIZ COM ALOCACAO OTIMA DE ZEROS-");
 		for(int i=0;i<tamanho;i++){
 			for(int j=0;j<tamanho;j++){
 				System.out.print(matriz[i][j]+" ");
